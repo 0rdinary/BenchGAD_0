@@ -6,6 +6,7 @@ public class Alldata implements Serializable{
 
     //all data parameter getter and setter
     private String project_name;
+    private String bench_type;
     private int scale_factor;
     private int transaction_refresh_rate;
     private boolean GPU_use=false;
@@ -20,6 +21,10 @@ public class Alldata implements Serializable{
     
     public void setProject_name(String name) {
         this.project_name = name;
+    }
+    
+    public void setBench_type(String type) {
+        this.bench_type = type;
     }
 
     public void setScale_factor(int scale_factor) {
@@ -54,6 +59,10 @@ public class Alldata implements Serializable{
     
     public String getProject_name() {
         return project_name;
+    }
+    
+    public String getBench_type() {
+        return bench_type;
     }
 
     public int getScale_factor() {

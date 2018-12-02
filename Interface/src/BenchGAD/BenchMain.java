@@ -1,10 +1,10 @@
 package BenchGAD;
 
-import Interface.BenchGADFrame;
+import Interface.MainFrame;
 
 public class BenchMain {
     public static void main(String[] args) {
-        BenchGADFrame BenchGAD = new BenchGADFrame();
+        MainFrame BenchGAD = new MainFrame();
         BenchGAD.setVisible(true);
     }
 }

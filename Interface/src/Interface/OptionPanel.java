@@ -52,6 +52,9 @@ public class OptionPanel extends javax.swing.JPanel {
         saveComputerBtn = new RoundButton();
         loadSettingBtn = new RoundButton();
         warningField = new javax.swing.JTextField();
+        buffer_pool_Label = new javax.swing.JLabel();
+        size_Label = new javax.swing.JLabel();
+        buffer_Box = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(0, 18, 50));
 
@@ -66,12 +69,15 @@ public class OptionPanel extends javax.swing.JPanel {
         scaleFactorBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "10", "30", "100", "300", "1000" }));
 
         transactionLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 16)); // NOI18N
-        transactionLabel1.setForeground(new java.awt.Color(255, 204, 0));
+        transactionLabel1.setForeground(new java.awt.Color(153, 153, 153));
         transactionLabel1.setText("Transaction");
 
         transactionLabel2.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        transactionLabel2.setForeground(new java.awt.Color(255, 204, 0));
+        transactionLabel2.setForeground(new java.awt.Color(153, 153, 153));
         transactionLabel2.setText("Refresh Rate");
+
+        transactionField.setEditable(false);
+        transactionField.setBackground(new java.awt.Color(153, 153, 153));
 
         gpuUseLabel.setFont(new java.awt.Font("Lucida Grande", 1, 16)); // NOI18N
         gpuUseLabel.setForeground(new java.awt.Color(255, 204, 0));
@@ -83,7 +89,7 @@ public class OptionPanel extends javax.swing.JPanel {
 
         cpuLabel2.setFont(new java.awt.Font("Lucida Grande", 1, 16)); // NOI18N
         cpuLabel2.setForeground(new java.awt.Color(255, 204, 0));
-        cpuLabel2.setText("Of GPU");
+        cpuLabel2.setText("of GPU");
 
         cpuCountBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "4", "8" }));
 
@@ -154,6 +160,16 @@ public class OptionPanel extends javax.swing.JPanel {
         warningField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         warningField.setBorder(null);
 
+        buffer_pool_Label.setFont(new java.awt.Font("Lucida Grande", 1, 16)); // NOI18N
+        buffer_pool_Label.setForeground(new java.awt.Color(255, 204, 0));
+        buffer_pool_Label.setText("Buffer Pool");
+
+        size_Label.setFont(new java.awt.Font("Lucida Grande", 1, 16)); // NOI18N
+        size_Label.setForeground(new java.awt.Color(255, 204, 0));
+        size_Label.setText("Size(GB)");
+
+        buffer_Box.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "4", "8", "16", "32", "64" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -177,33 +193,37 @@ public class OptionPanel extends javax.swing.JPanel {
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(buffer_pool_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(size_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(buffer_Box, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(warningField, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(scaleFactorLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(scaleFactorBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cpuLabel1)
-                                    .addComponent(cpuLabel2))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cpuCountBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(transactionLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(transactionLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(transactionField, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(gpuUseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(gpuBox)))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(projectNameLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(nameField))
-                            .addComponent(warningField))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(gpuUseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cpuLabel1))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cpuCountBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(gpuBox)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(transactionLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(transactionLabel1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(transactionField, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(cpuLabel2, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -212,43 +232,48 @@ public class OptionPanel extends javax.swing.JPanel {
                 .addComponent(titleBackPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
                 .addComponent(typeBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(projectNameLabel)
-                    .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(projectNameLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(scaleFactorLabel)
                     .addComponent(scaleFactorBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(transactionLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(transactionField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, 0)
+                .addComponent(transactionLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(transactionLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(gpuUseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cpuLabel1)
+                            .addComponent(cpuCountBox, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, 0)
-                        .addComponent(transactionLabel2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addComponent(transactionField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(gpuUseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(gpuBox, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(cpuLabel1)
+                        .addComponent(cpuLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(buffer_pool_Label)
+                            .addComponent(buffer_Box, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, 0)
-                        .addComponent(cpuLabel2))
-                    .addComponent(cpuCountBox, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(warningField, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(saveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(saveComputerBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addComponent(loadSettingBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32))
+                        .addComponent(size_Label)
+                        .addGap(37, 37, 37)
+                        .addComponent(warningField, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(saveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(saveComputerBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(loadSettingBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(gpuBox, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -275,6 +300,10 @@ public class OptionPanel extends javax.swing.JPanel {
         return cpuCount;
     }
     
+    public String getType() {
+        return typeBox.getSelectedItem().toString();
+    }
+    
     /* 
      * Purpose : saveBtn's cursor event
     */
@@ -294,7 +323,9 @@ public class OptionPanel extends javax.swing.JPanel {
         scaleFactor = Integer.parseInt(scaleFactorBox.getSelectedItem().toString());
         
         try {
-            refreshRate = Integer.parseInt(transactionField.getText());
+            if (!typeBox.getSelectedItem().toString().equals("TPC-H")) {
+                refreshRate = Integer.parseInt(transactionField.getText());
+            }
         } catch (NumberFormatException e) {
             warningField.setForeground(new Color(255, 0, 0));
             warningField.setText("refreshRate must be Integer");
@@ -399,13 +430,15 @@ public class OptionPanel extends javax.swing.JPanel {
         cpuCountBox.setSelectedItem(Integer.toString(cpuCount));
         
         warningField.setForeground(new Color(153,255,0));
-        warningField.setText("Load Option Success");
+        warningField.setText(" ");
         
         loadProject.dispose();
     }//GEN-LAST:event_loadSettingBtnMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> buffer_Box;
+    private javax.swing.JLabel buffer_pool_Label;
     private javax.swing.JComboBox<String> cpuCountBox;
     private javax.swing.JLabel cpuLabel1;
     private javax.swing.JLabel cpuLabel2;
@@ -418,6 +451,7 @@ public class OptionPanel extends javax.swing.JPanel {
     private javax.swing.JButton saveComputerBtn;
     private javax.swing.JComboBox<String> scaleFactorBox;
     private javax.swing.JLabel scaleFactorLabel;
+    private javax.swing.JLabel size_Label;
     private javax.swing.JPanel titleBackPanel;
     private javax.swing.JLabel titleLabel;
     private javax.swing.JTextField transactionField;
