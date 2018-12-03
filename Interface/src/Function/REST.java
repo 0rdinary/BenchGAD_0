@@ -19,6 +19,7 @@ import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
 public class REST {
+    String SURL = "http://155.230.34.150:3000/users";
     public void getInfo()
     {
         BufferedReader in = null;
@@ -26,7 +27,7 @@ public class REST {
         {
             try {
                 //URL obj = new URL("http://127.0.0.1:3000/users/"+i); // 호출할 url
-                URL obj=new URL("http://127.0.0.1:3001/users");
+                URL obj=new URL(SURL);
                 HttpURLConnection con = (HttpURLConnection)obj.openConnection();
                  con.setRequestProperty("Accept", "application/json");
                 con.setRequestMethod("GET");
@@ -50,7 +51,7 @@ public class REST {
      
          try {
 
-		URL url = new URL("http://127.0.0.1:3001/users");
+		URL url = new URL(SURL);
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 		conn.setDoOutput(true);
 		conn.setRequestMethod("POST");

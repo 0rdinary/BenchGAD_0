@@ -5,6 +5,8 @@
 package Interface;
 
 import Data.Alldata;
+import Function.REST;
+import java.awt.CardLayout;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Rectangle;
@@ -19,7 +21,8 @@ public class MainFrame extends javax.swing.JFrame {
     private boolean is_folded = true;
     
     /* status of card_panel */
-    private boolean is_bench_panel = true;
+    private boolean isBenchPanel = true;
+    private boolean isResultPanel = false;
     
     /* AllData value */
     private Alldata ad = new Alldata();
@@ -41,12 +44,15 @@ public class MainFrame extends javax.swing.JFrame {
         collect_Panel = new javax.swing.JPanel();
         bench_Btn = new javax.swing.JButton();
         setting_Btn = new javax.swing.JButton();
+        resultBtn = new javax.swing.JButton();
         expension_Panel = new javax.swing.JPanel();
         optionPanel1 = new Interface.OptionPanel();
         progress_Panel = new javax.swing.JPanel();
         reload_Btn = new javax.swing.JButton();
+        startBtn = new javax.swing.JButton();
         card_Panel = new javax.swing.JPanel();
         mainPanel1 = new Interface.MainPanel();
+        resultPanel2 = new Interface.ResultPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -87,15 +93,26 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        resultBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/outputDefault.png"))); // NOI18N
+        resultBtn.setBorderPainted(false);
+        resultBtn.setPreferredSize(new java.awt.Dimension(48, 44));
+        resultBtn.setSize(new java.awt.Dimension(48, 44));
+        resultBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                resultBtnMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                resultBtnMouseEntered(evt);
+            }
+        });
+
         javax.swing.GroupLayout collect_PanelLayout = new javax.swing.GroupLayout(collect_Panel);
         collect_Panel.setLayout(collect_PanelLayout);
         collect_PanelLayout.setHorizontalGroup(
             collect_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(collect_PanelLayout.createSequentialGroup()
-                .addGroup(collect_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(setting_Btn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(bench_Btn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(setting_Btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(resultBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(bench_Btn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         collect_PanelLayout.setVerticalGroup(
             collect_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -104,6 +121,8 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(bench_Btn)
                 .addGap(18, 18, 18)
                 .addComponent(setting_Btn)
+                .addGap(18, 18, 18)
+                .addComponent(resultBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -116,13 +135,13 @@ public class MainFrame extends javax.swing.JFrame {
             side_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(side_PanelLayout.createSequentialGroup()
                 .addComponent(collect_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(2, 2, 2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(expension_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         side_PanelLayout.setVerticalGroup(
             side_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(collect_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(expension_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(expension_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
         );
 
         progress_Panel.setBackground(new java.awt.Color(0, 0, 0));
@@ -140,19 +159,34 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        startBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/playOn.png"))); // NOI18N
+        startBtn.setBorderPainted(false);
+        startBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                startBtnMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                startBtnMouseEntered(evt);
+            }
+        });
+
         javax.swing.GroupLayout progress_PanelLayout = new javax.swing.GroupLayout(progress_Panel);
         progress_Panel.setLayout(progress_PanelLayout);
         progress_PanelLayout.setHorizontalGroup(
             progress_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, progress_PanelLayout.createSequentialGroup()
-                .addContainerGap(1058, Short.MAX_VALUE)
+                .addContainerGap(995, Short.MAX_VALUE)
                 .addComponent(reload_Btn)
-                .addGap(94, 94, 94))
+                .addGap(18, 18, 18)
+                .addComponent(startBtn)
+                .addGap(98, 98, 98))
         );
         progress_PanelLayout.setVerticalGroup(
             progress_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, progress_PanelLayout.createSequentialGroup()
-                .addComponent(reload_Btn)
+            .addGroup(progress_PanelLayout.createSequentialGroup()
+                .addGroup(progress_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(startBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(reload_Btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -161,9 +195,8 @@ public class MainFrame extends javax.swing.JFrame {
         card_Panel.setMinimumSize(new java.awt.Dimension(1150, 678));
         card_Panel.setPreferredSize(new java.awt.Dimension(1150, 678));
         card_Panel.setLayout(new java.awt.CardLayout());
-
-        mainPanel1.setMinimumSize(new java.awt.Dimension(1150, 656));
-        card_Panel.add(mainPanel1, "card2");
+        card_Panel.add(mainPanel1, "mainCard");
+        card_Panel.add(resultPanel2, "resultCard");
 
         javax.swing.GroupLayout back_PanelLayout = new javax.swing.GroupLayout(back_Panel);
         back_Panel.setLayout(back_PanelLayout);
@@ -182,7 +215,7 @@ public class MainFrame extends javax.swing.JFrame {
             back_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(back_PanelLayout.createSequentialGroup()
                 .addGroup(back_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(side_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(side_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
                     .addComponent(card_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, 0)
                 .addComponent(progress_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -196,18 +229,24 @@ public class MainFrame extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(back_Panel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 722, Short.MAX_VALUE)
+            .addComponent(back_Panel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 744, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
-    /*
-    * Purpose : fold or unfold side_panel
-    *  Author : mwJeong
-    */
     private void bench_BtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bench_BtnMouseClicked
+        // status change and icon change
+        if (isResultPanel == true) {
+            isResultPanel = false;
+            resultBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/outputDefault.png")));
+        }
+        isBenchPanel = true;
+        bench_Btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/benchOn.png")));
         
+        // cardLayout change
+        CardLayout card = (CardLayout)card_Panel.getLayout();
+        card.show(card_Panel, "mainCard");
     }//GEN-LAST:event_bench_BtnMouseClicked
 
     /*
@@ -275,6 +314,61 @@ public class MainFrame extends javax.swing.JFrame {
         reload_Btn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_reload_BtnMouseEntered
 
+    private void resultBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_resultBtnMouseEntered
+        resultBtn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_resultBtnMouseEntered
+
+   /*
+    * Purpose : change card layout
+    *  Author : mwJeong
+    */
+    private void resultBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_resultBtnMouseClicked
+        
+        // status change and icon change
+        if (isBenchPanel == true) {
+            isBenchPanel = false;
+            bench_Btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/benchDefault.png")));
+        }
+        isResultPanel = true;
+        resultBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/outputOn.png")));
+        
+        // cardLayout change
+        CardLayout card = (CardLayout)card_Panel.getLayout();
+        card.show(card_Panel, "resultCard");
+    }//GEN-LAST:event_resultBtnMouseClicked
+
+    private void startBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_startBtnMouseEntered
+        startBtn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_startBtnMouseEntered
+
+    /*
+    * Purpose : start benchmarking
+    *  Author : mwJeong
+    */
+    private void startBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_startBtnMouseClicked
+        int count;
+        //collect file
+        REST Posting = new REST();
+        Alldata topost = new Alldata();
+        topost.setProject_name(optionPanel1.getProjectName());
+        topost.setScale_factor(optionPanel1.getScaleFactor());
+        topost.setTransaction_refresh_rate(optionPanel1.getRefreshRate());
+        topost.setGPU_use(optionPanel1.getGpuUse());
+        topost.setCPU_count(optionPanel1.getCpuCount());
+        topost.settext(mainPanel1.getInput());
+        
+        int dbCount = mainPanel1.selected_List.getModel().getSize();
+        String[] dbList = new String[dbCount];
+        
+        for (int i = 0; i < dbCount; i++) {
+            dbList[i] = String.valueOf(mainPanel1.selected_List.getModel().getElementAt(i));
+        }
+        topost.setDblist(dbList, dbCount);
+        
+        Posting.postInfo(topost);
+    }//GEN-LAST:event_startBtnMouseClicked
+
+    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel back_Panel;
@@ -286,7 +380,10 @@ public class MainFrame extends javax.swing.JFrame {
     private Interface.OptionPanel optionPanel1;
     private javax.swing.JPanel progress_Panel;
     private javax.swing.JButton reload_Btn;
+    private javax.swing.JButton resultBtn;
+    private Interface.ResultPanel resultPanel2;
     private javax.swing.JButton setting_Btn;
     private javax.swing.JPanel side_Panel;
+    private javax.swing.JButton startBtn;
     // End of variables declaration//GEN-END:variables
 }

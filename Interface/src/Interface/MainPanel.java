@@ -843,6 +843,11 @@ public class MainPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    public String getInput() {
+        return input_Area.getText();
+    }
+    
     /*
      * Purpose : Sample Query setting
      *  Author : mwJeong
@@ -2073,7 +2078,7 @@ public class MainPanel extends javax.swing.JPanel {
     private javax.swing.JCheckBox select_all_Check;
     private javax.swing.JLabel select_all_Label;
     private javax.swing.JPanel select_title_Panel;
-    private javax.swing.JList<String> selected_List;
+    public javax.swing.JList<String> selected_List;
     private javax.swing.JScrollPane selected_Scroll;
     private javax.swing.JLabel selet_title_Label;
     public javax.swing.JTextArea status_Area;
