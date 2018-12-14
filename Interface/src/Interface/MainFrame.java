@@ -58,7 +58,6 @@ public class MainFrame extends javax.swing.JFrame {
         setBackground(new java.awt.Color(255, 255, 255));
         setBounds(new java.awt.Rectangle(50, 0, 1200, 744));
         setMinimumSize(new java.awt.Dimension(1200, 744));
-        setPreferredSize(new java.awt.Dimension(1200, 744));
         setSize(new java.awt.Dimension(1200, 744));
 
         back_Panel.setPreferredSize(new java.awt.Dimension(1200, 700));
@@ -95,7 +94,6 @@ public class MainFrame extends javax.swing.JFrame {
 
         resultBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/outputDefault.png"))); // NOI18N
         resultBtn.setBorderPainted(false);
-        resultBtn.setPreferredSize(new java.awt.Dimension(48, 44));
         resultBtn.setSize(new java.awt.Dimension(48, 44));
         resultBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -175,7 +173,7 @@ public class MainFrame extends javax.swing.JFrame {
         progress_PanelLayout.setHorizontalGroup(
             progress_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, progress_PanelLayout.createSequentialGroup()
-                .addContainerGap(995, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(reload_Btn)
                 .addGap(18, 18, 18)
                 .addComponent(startBtn)
@@ -366,6 +364,8 @@ public class MainFrame extends javax.swing.JFrame {
         topost.setDblist(dbList, dbCount);
         
         Posting.postInfo(topost);
+        
+        
     }//GEN-LAST:event_startBtnMouseClicked
 
     
@@ -376,7 +376,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel card_Panel;
     private javax.swing.JPanel collect_Panel;
     private javax.swing.JPanel expension_Panel;
-    private Interface.MainPanel mainPanel1;
+    public Interface.MainPanel mainPanel1;
     private Interface.OptionPanel optionPanel1;
     private javax.swing.JPanel progress_Panel;
     private javax.swing.JButton reload_Btn;

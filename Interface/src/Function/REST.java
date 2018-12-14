@@ -27,7 +27,7 @@ public class REST {
         {
             try {
                 //URL obj = new URL("http://127.0.0.1:3000/users/"+i); // 호출할 url
-                URL obj=new URL(SURL);
+                URL obj=new URL(SURL + "/" + i);
                 HttpURLConnection con = (HttpURLConnection)obj.openConnection();
                  con.setRequestProperty("Accept", "application/json");
                 con.setRequestMethod("GET");
